@@ -1072,4 +1072,4 @@ async def get_bank_data():
 
 client.load_extension('jishaku')
 
-client.run("ODE0NzE5MTQ3ODcwOTEyNTIy.YDh8VQ.X8VEj_CZqmoCiBAt5JTBn_UhczQ")
+client.run("token")
