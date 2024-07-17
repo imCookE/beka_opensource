@@ -685,7 +685,7 @@ async def on_message(message):
                 users = await get_bank_data()
                 user = message.author
                 if users[str(user.id)]["verify"] == 'Y':
-                    if users[str(user.id)]["runing"] == 0:
+                    if users[str(user.id)]["running"] == 0:
                         quiz = await message.reply('어떤 일을 진행하시겠어요?\n\n1️⃣ - 15초 ( 2,500 코인 )\n2️⃣ - 30초 ( 4,500 코인 )\n3️⃣ - 1분 ( 8,000 코인 )\n\n**※** 시간이 길수록 보상 코인이 적은 이유는 시간이 많을수록 메시지 작성량이 적어지기 때문이에요.')
                         await quiz.add_reaction('1️⃣')
                         await quiz.add_reaction('2️⃣')
@@ -708,7 +708,7 @@ async def on_message(message):
                                 await message.reply(f'일을 시작했어요! 30초 뒤에 **4,500 코인** 이 지급될거에요!')
                             if str(reaction.emoji) == '3️⃣':
                                 await message.reply(f'일을 시작했어요! 1분 뒤에 **8,000** 코인이 지급될거에요!')
-                            users[str(user.id)]["runing"] = 1
+                            users[str(user.id)]["running"] = 1
                             with open('save.json','w',encoding='UTF-8') as f:
                                 json.dump(users,f)
                             if str(reaction.emoji) == '1️⃣':
@@ -729,10 +729,10 @@ async def on_message(message):
                                 users[str(user.id)]["money"] += 4500
                             if str(reaction.emoji) == '3️⃣':
                                 users[str(user.id)]["money"] += 8000
-                            users[str(user.id)]["runing"] = 0
+                            users[str(user.id)]["running"] = 0
                             with open('save.json','w',encoding='UTF-8') as f:
                                 json.dump(users,f)
-                    if users[str(user.id)]["runing"] == 1:
+                    if users[str(user.id)]["running"] == 1:
                         await message.reply('<:ZeroBOT_Warning:799431198489313340> 이중 알바는 안돼요!')
                 else:
                     await message.reply(f'<:ZeroBOT_Warning:799431198489313340> 베카와 친해진 다음에 알바가 가능해요!\n\n**{prefix}가입** 을 사용해 가입 후 사용해주세요!')
@@ -845,7 +845,7 @@ async def on_message(message):
                 split = message.content.split(" ")
                 if users[str(user.id)]["dev"] == 1:
                     if message.content == f'{prefix}변경':
-                        await message.reply(f'**{prefix}변경 <종류> <유저아이디> <추가/삭제할 수>** 명령어를 사용해 사용할 수 있습니다.\n\n**ex )** {prefix}변경 money 123456789 -10000\n\n종류 : money, bankm, point, box, dobak_per, command_count, ticket_cgg, ticket_nick, runing, dg, next_dg, infom, **dev**, **premium**, **blist**')
+                        await message.reply(f'**{prefix}변경 <종류> <유저아이디> <추가/삭제할 수>** 명령어를 사용해 사용할 수 있습니다.\n\n**ex )** {prefix}변경 money 123456789 -10000\n\n종류 : money, bankm, point, box, dobak_per, command_count, ticket_cgg, ticket_nick, running, dg, next_dg, infom, **dev**, **premium**, **blist**')
                     else:
                         if split[2] == 'infom' or split[2] == 'dg' or split[2] == 'next_dg':
                             split = message.content.split(" ")
@@ -1053,7 +1053,7 @@ async def open_account(user):
         users[str(user.id)]["point"] = 0
         users[str(user.id)]["ticket_cgg"] = 0
         users[str(user.id)]["ticket_nick"] = 0
-        users[str(user.id)]["runing"] = 0
+        users[str(user.id)]["running"] = 0
         users[str(user.id)]["dg"] = "초보 도박러"
         users[str(user.id)]["next_dg"] = "경험 도박러"
         users[str(user.id)]["command_count"] = 0
